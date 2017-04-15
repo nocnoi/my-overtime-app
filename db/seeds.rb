@@ -3,3 +3,4 @@
 end
 
 puts "100 posts created"
+
