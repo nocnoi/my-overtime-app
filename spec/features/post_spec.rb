@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'navigate' do
   before do
-    @user = User.create(email: "test@test.com", password: "blahblah", password_confirmation: "blahblah", first_name: "Jane", last_name: "Snow")
+    @user = FactoryGirl.create(:user)
     login_as(@user, :scope => :user)   
   end
 
@@ -20,10 +20,10 @@ describe 'navigate' do
   	end
 
     it 'has a list of posts' do
-      Post.create(date: Date.today, rationale: "Post1", user_id: @user.id)
-      Post.create(date: Date.today, rationale: "Post2", user_id: @user.id)
+      FactoryGirl.create(:post)
+      FactoryGirl.create(:second_post)
       visit posts_path
-      expect(page).to have_content(/Post1|Post2/)
+      expect(page).to have_content(/rationale1|rationale2/)
       
     end
   end
@@ -34,7 +34,7 @@ describe 'navigate' do
     end
 
     it 'can reach the new form successfully' do  
-      expect(page.status_code).to eq (200)
+      expect(page.status_code).to eq(200)
     end
 
     it 'can be created from the new form page' do
@@ -49,6 +49,27 @@ describe 'navigate' do
       fill_in 'post[rationale]', with: "User Association"
       click_on "Save"
       expect(User.last.posts.last.rationale).to eq("User Association")
+    end
+  end
+
+  describe 'edit' do
+    before do
+      @post = FactoryGirl.create(:post)
+    end
+
+    it 'can be reached by clicking edit on index page' do
+      visit posts_path
+      click_link "edit_#{@post.id}"
+      expect(page.status_code).to eq(200)
+    end
+
+    it 'can be edited' do
+      visit edit_post_path(@post)
+
+      fill_in 'post[date]', with: Date.today
+      fill_in 'post[rationale]', with: "Edited content"
+      click_on "Save"
+      expect(User.last.posts.last.rationale).to eq("Edited content")
     end
   end
 
