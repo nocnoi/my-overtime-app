@@ -7,15 +7,15 @@ FactoryGirl.define do
 	  first_name 'Jane'
 	  last_name 'Doe'
 	  email { generate :email }
-	  password 'blahblah'
-	  password_confirmation 'blahblah'
+	  password 'asdfasdf'
+	  password_confirmation 'asdfasdf'
 	end
 
 	factory :admin_user, class: "AdminUser" do
 	  first_name 'Admin'
 	  last_name 'User'
 	  email { generate :email}
-	  password 'blahblah'
-	  password_confirmation 'blahblah'
+	  password 'asdfasdf'
+	  password_confirmation 'asdfasdf'
 	end
 end
