@@ -15,6 +15,13 @@
 - Email summary to managers for approval
 - Needs to be documented if the employee did not log overtime
 
+## Approval Workflow:
+x Create a new attribute called status inside the posts table. 
+x Make status a required attribute.
+x Have a default value for statuses
+- Implement approval stages
+- Locking the records
+
 ## UI:
 - x Bootstrap -> formatting
 - Icons from Font Awesome 
@@ -22,3 +29,4 @@
 
 ## Refactor TODO's:
 - Refactor user association integration test is features/post_spec
+
