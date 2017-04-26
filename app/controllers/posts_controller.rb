@@ -24,9 +24,12 @@ class PostsController < ApplicationController
 	end
 
 	def edit
+		authorize @post 	# Pundit gem authorizes @post, via @record defined in application_policy.rb
 	end
 
 	def update
+		authorize @post 	# Pundit gem authorization
+
 		if @post.update(post_params)
 		  redirect_to @post, notice: "Your post was edited successfully"
 		else
